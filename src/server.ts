@@ -17,5 +17,5 @@ const main = async() => {
 main();
 
 app.listen(config.port, () => {
-    console.log(`your server is running on the port http://localhost:${config.port}`)
+    console.log(`your server is running on the port http://localhost:${config.port} `)
 })

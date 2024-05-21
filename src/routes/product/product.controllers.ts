@@ -21,6 +21,25 @@ const createProduct = async (req: Request, res: Response) => {
     }
 };
 
+//get products 
+const getAllProducts = async (req: Request, res: Response) => {
+    try {
+        const result = await productServices.getAllProductsFromDB();
+        res.status(200).json({
+            "success": true,
+            "message": "Products fetched  successfully!",
+            "data": result
+        })
+    } catch (err) {
+        res.status(500).json({
+            "success": false,
+            "message": "Product is not fetched successfully!",
+            "data": `You've an error ${err}`
+        })
+    }
+};
+
 export const productControllers = {
     createProduct,
+    getAllProducts,
 }

@@ -4,6 +4,7 @@ const router = express.Router();
 
 //api router 
 router.post('/', productControllers.createProduct);
+router.get('/', productControllers.getAllProducts);
 
 // export controller 
-export default router;
+export default  router;
