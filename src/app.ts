@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import router from './routes/product/product.routs';
+import router from './modules/product/product.routs';
 const app = express();
 
 //middlewear
