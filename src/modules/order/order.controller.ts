@@ -4,12 +4,15 @@ import { orderServices } from './order.services';
 
 const createOrder = async (req: Request, res: Response) => {
     try {
+        // get body data from frontend 
         const { order } = req.body;
+
+        // validate data using zod 
         const orderDataValidation = OrderSchema.parse(order);
         if (orderDataValidation) {
             const result = await orderServices.createOrderIntoDB(orderDataValidation);
             if (result !== null) {
-                res.status(500).json({
+                res.status(200).json({
                     "success": true,
                     "message": "Order created successfully!",
                     "data": result,
