@@ -1,5 +1,5 @@
 import app from "./app";
-import config from '../src/config/index';
+import config from './app/config/index';
 import mongoose from "mongoose";
 
 const main = async() => {

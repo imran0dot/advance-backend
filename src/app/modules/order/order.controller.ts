@@ -21,7 +21,7 @@ const createOrder = async (req: Request, res: Response) => {
             else {
                 res.status(500).json({
                     "success": false,
-                    "message": "Order not created successfully!",
+                    "message": "Insufficient quantity available in inventory",
                     "data": result
                 })
             }
@@ -54,8 +54,8 @@ const getAllOrders = async (req: Request, res: Response) => {
             })
         }else{
             res.status(200).json({
-                "success": false,
-                "message": "Order fetched successfully! but you don't have any order",
+                "success": true,
+                "message": "Order not found",
                 "data": result,
             })
         }
@@ -64,7 +64,7 @@ const getAllOrders = async (req: Request, res: Response) => {
     catch (err) {
         res.status(500).json({
             "success": true,
-            "message": "Order not fetched successfully!",
+            "message": "Something went wrong!",
             "data": err
         })
     }

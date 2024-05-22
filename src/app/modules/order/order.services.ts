@@ -9,7 +9,7 @@ const createOrderIntoDB = async (orderData: Order) => {
 
     if (product) {
         //get quantity of product
-        if(product.inventory.quantity == 0){
+        if (product.inventory.quantity === 0 || product.inventory.quantity < orderData.quantity) {
             return null
         }
         // Update the quantity of the product
@@ -17,6 +17,16 @@ const createOrderIntoDB = async (orderData: Order) => {
             { _id: orderData.productId },
             { $inc: { 'inventory.quantity': -orderData.quantity } }
         );
+
+        // Check if the quantity is now zero
+        const updatedProduct = await ProductModel.findOne({ _id: orderData.productId });
+
+        // update isStock 
+        if (updatedProduct && updatedProduct.inventory.quantity === 0) {
+            await ProductModel.updateOne(
+                { _id: orderData.productId },
+                { $set: { 'inventory.inStock': false } })
+        };
 
         return await OrderModel.create(orderData);
     }
