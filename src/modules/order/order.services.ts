@@ -4,7 +4,6 @@ import OrderModel from "./order.model";
 
 const createOrderIntoDB = async(orderData: Order) => {
     const findProductOnDb = await ProductModel.find({_id: orderData.productId});
-    console.log(findProductOnDb.length > 0);
     if(findProductOnDb.length > 0){
         return await OrderModel.create(orderData);
     }
@@ -13,6 +12,11 @@ const createOrderIntoDB = async(orderData: Order) => {
     }
 };
 
+const getAllOrderFromDB = async() =>{
+    const result = await OrderModel.find();
+    return result;
+}
 export const orderServices = {
     createOrderIntoDB,
+    getAllOrderFromDB
 }
